@@ -8,15 +8,74 @@
   </head>
   <body></body>
   <script>
+    let playerPrompt = "Make your selection";
+    let playerScore = 0;
+
     function computerPlay() {
       let chooseHand = Math.floor(Math.random() * 3);
       if (chooseHand === 0) {
-        return "Rock";
+        return "rock";
       } else if (chooseHand === 1) {
-        return "Paper";
+        return "paper";
       } else {
-        return "Scissors";
+        return "scissors";
       }
+    }
+
+    function playRound(playerSelection, computerSelection) {
+      let playerSelectionLower = playerSelection.toLowerCase();
+      if (playerSelectionLower === computerSelection) {
+        console.log("It's a tie!");
+        return playerScore;
+      } else if (
+        playerSelectionLower === "rock" &&
+        computerSelection === "paper"
+      ) {
+        console.log("You Lose! Paper beats Rock");
+        return playerScore;
+      } else if (
+        playerSelectionLower === "rock" &&
+        computerSelection === "scissors"
+      ) {
+        console.log("You win! Rock beats Scissors");
+        return ++playerScore;
+      } else if (
+        playerSelectionLower === "paper" &&
+        computerSelection === "rock"
+      ) {
+        console.log("You win! Paper beats Rock");
+        return ++playerScore;
+      } else if (
+        playerSelectionLower === "paper" &&
+        computerSelection === "scissors"
+      ) {
+        console.log("You lose! Scissors beats paper");
+        return playerScore;
+      } else if (
+        playerSelectionLower === "scissors" &&
+        computerSelection === "rock"
+      ) {
+        console.log("You lose! Rock beats Scissors");
+        return playerScore;
+      } else if (
+        playerSelectionLower === "scissors" &&
+        computerSelection === "paper"
+      ) {
+        console.log("You win! Scissors beats Paper");
+        return ++playerScore;
+      } else {
+        console.log("Enter a valid selection");
+      }
+    }
+
+    function game() {
+      for (let i = 0; i < 5; i++) {
+        result = playRound(prompt(playerPrompt), computerPlay());
+        console.log(result);
+      }
+      let gameOverMessage = `You won ${playerScore} out of 5 games`;
+      console.log(gameOverMessage);
+      playerScore = 0;
     }
   </script>
 </html>
